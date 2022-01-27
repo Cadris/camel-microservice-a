@@ -1,5 +1,7 @@
 package com.sayan.camelmicroservicea.routes.a;
 
+import java.time.LocalDateTime;
+
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +25,8 @@ public class MyFirstTimerRouter extends RouteBuilder{
 		 */
 		
 		from("timer:first-timer")
-			.transform().constant("My Constant Message")
+//			.transform().constant("My Constant Message")
+			.transform().constant("Time Now : "+LocalDateTime.now())
 			.to("log:first-timer");
 		
 	}
