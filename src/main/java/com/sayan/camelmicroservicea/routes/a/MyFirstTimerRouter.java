@@ -1,12 +1,20 @@
 package com.sayan.camelmicroservicea.routes.a;
 
-import java.time.LocalDateTime;
-
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.sayan.camelmicroservicea.custombean.GetCurrentTimeBean;
+import com.sayan.camelmicroservicea.custombean.SimpleLoggingProcessingComponent;
 
 @Component
 public class MyFirstTimerRouter extends RouteBuilder{
+	
+	@Autowired
+	private GetCurrentTimeBean getCurrentTimeBean;
+	
+	@Autowired
+	private SimpleLoggingProcessingComponent loggingComponent;
 
 	@Override
 	public void configure() throws Exception {
@@ -18,6 +26,10 @@ public class MyFirstTimerRouter extends RouteBuilder{
 		 * 
 		 * Endpoints Here 2 : Queue, Database
 		 * 
+		 * Transform 	:: 	Change the Message Body
+		 * Processing 	::	Does not Change the body but use the data 
+		 * 					to do Some Work
+		 * 
 		 *  Now Start :
 		 *  timer
 		 *  transformation
@@ -26,9 +38,11 @@ public class MyFirstTimerRouter extends RouteBuilder{
 		
 		from("timer:first-timer")
 //			.transform().constant("My Constant Message")
-			.transform().constant("Time Now : "+LocalDateTime.now())
+//			.transform().constant("Time Now : "+LocalDateTime.now())
+//			.bean("getCurrentTime")
+			.bean(getCurrentTimeBean, "getCurrentTime")
+			.bean(loggingComponent)
 			.to("log:first-timer");
-		
 	}
 
 }
