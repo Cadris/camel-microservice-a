@@ -9,8 +9,8 @@ public class SimpleLoggingProcessingComponent {
 	
 	private Logger logger = LoggerFactory.getLogger(SimpleLoggingProcessingComponent.class);
 
-	public void process(String message) {
+	public void process(String message1,String message2) {
 		// TODO : Logging (Some Task)
-		logger.info("SimpleLoggingProcessingComponent {}", message);
+		logger.info(message1+" {}", message2);
 	}
 }

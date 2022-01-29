@@ -8,7 +8,7 @@ import com.sayan.camelmicroservicea.custombean.GetCurrentTimeBean;
 import com.sayan.camelmicroservicea.custombean.SimpleLoggingProcessingComponent;
 import com.sayan.camelmicroservicea.custombean.SimpleLoggingProcessor;
 
-@Component
+//@Component
 public class MyFirstTimerRouter extends RouteBuilder{
 	
 	@Autowired
